@@ -1,6 +1,7 @@
 import os
 import time
-from StringIO import StringIO
+from io import StringIO
+# from StringIO import StringIO
 
 import io
 import numpy as np
