@@ -70,7 +70,7 @@ def get_image_from_url(img_url):
         except Exception:
             break
 
-    print 'Couldn\'t download image with url: %s' % img_url
+    print('Couldn\'t download image with url: %s' % img_url)
 
 
 def get_crop_image_from_url(img_url, crop=None):
