@@ -25,13 +25,13 @@ class FeatureExtractorModel():
                 model_version)
 
         elif model_version == 'v2.2017':
-            from v2_2017 import FeatureExtractorModelVersioned
+            from .v2_2017 import FeatureExtractorModelVersioned
 
         elif model_version == 'v1.7tf':
-            from v1_7tf import FeatureExtractorModelVersioned
+            from .v1_7tf import FeatureExtractorModelVersioned
 
         elif model_version == 'v1.7p':
-            from v1_7p import FeatureExtractorModelVersioned
+            from .v1_7p import FeatureExtractorModelVersioned
 
         print('Returning fex model_version: %s' % model_version)
         return FeatureExtractorModelVersioned(*args, **kwargs)
@@ -55,12 +55,12 @@ class Transformer():
                 model_version)
 
         elif model_version == 'v2.2017':
-            from v2_2017.transformer import Transformer
+            from .v2_2017.transformer import Transformer
 
         elif model_version == 'v1.7tf':
-            from v1_7tf.transformer import Transformer
+            from .v1_7tf.transformer import Transformer
 
         elif model_version == 'v1.7p':
-            from v1_7p.transformer import Transformer
+            from .v1_7p.transformer import Transformer
 
         return Transformer(*args, **kwargs)

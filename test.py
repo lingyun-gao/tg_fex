@@ -1,4 +1,4 @@
-import FeatureExtractor, Transformer
+from f import FeatureExtractor, Transformer
 
 USE_GPU = False
 BATCH_SIZE = 8
