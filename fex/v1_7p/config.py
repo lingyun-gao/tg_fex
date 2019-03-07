@@ -1,0 +1,2 @@
+FEX_VERSION = 'v1.7p'
+INPUT_WH = 224
