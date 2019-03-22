@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 # TODO: can be 64 or 128 on GPU machine
 batch_size = 2
 
-_model = FeatureExtractorModelVersioned(batch_size=batch_size)
+_model = FeatureExtractorBase(batch_size=batch_size)
 _transformer = _model.t
 
 
@@ -68,22 +68,16 @@ class Transformer():
 
 class FeatureExtractor(FeatureExtractorBase):
     def __init__(self, net_batch_size, *args, **kwargs):
-        self.model = FeatureExtractorBase.latest(
-            batch_size=None)
-
+        self.model = _model
         self.batch_size = net_batch_size
 
     def forward(self, batch_in):
         if batch_in.shape[0] != self.batch_size:
             raise Exception("Input batch size must be %d" % self.batch_size)
 
-        forward_batch = self.model.forward_batch(batch_in, return_tags=True)
-
+        forward_batch = self.model.forward_batch(batch_in)
         forwards = []
         for blob in forward_batch:
-            forwards.append({
-                'embedding': blob[self.model.pca_layer].tolist(),
-                'tags': blob['tags']
-            })
+            forwards.append(blob['common_layer'])
 
         return forwards
