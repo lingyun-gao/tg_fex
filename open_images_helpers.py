@@ -7,7 +7,7 @@ open_images_mod_name = 'open_images'
 
 def get_idxs_wnids_names():
     r = requests.get(LABELS_URL)
-    lines = r.content.strip().split('\n')
+    lines = r.text.strip().split('\n')
 
     idxs_wnids_names = []
     for idx, line in enumerate(lines):

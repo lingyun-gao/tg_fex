@@ -1,2 +1,0 @@
-FEX_VERSION = 'v1.7tf'
-INPUT_WH = 224

@@ -45,7 +45,7 @@ def get_and_set_model_paths():
         local_path = os.path.join(fex_dir, fn)
         if not os.path.exists(local_path):
             print('copying %s from s3 ...' % fn)
-            urllib.urlretrieve(fn2urls[fn], local_path)
+            urllib.request.urlretrieve(fn2urls[fn], local_path)
 
     checkpoint_path = os.path.join(fex_dir, model_iter)
     return checkpoint_path
@@ -219,7 +219,7 @@ general image catalogs).""" % FEX_VERSION
         for layer_name in self.prob_layers:
             mod_name = layer_name.replace('_prob', '')
             prob = embedding[layer_name]
-            mod_topK = sorted(enumerate(prob), key=lambda (_, v): v, reverse=True)[:6]
+            mod_topK = sorted(enumerate(prob), key=lambda v: v[1], reverse=True)[:6]
 
             if debug:
                 print('[%s]:' % mod_name)

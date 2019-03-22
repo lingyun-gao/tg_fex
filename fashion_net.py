@@ -1,9 +1,9 @@
 import tensorflow as tf
 slim = tf.contrib.slim
 
-from .fashion_net_base import fashion_net_base
-from .lyst_external_helpers import LystExternal
-from .open_images_helpers import OpenImages
+from fashion_net_base import fashion_net_base
+from lyst_external_helpers import LystExternal
+from open_images_helpers import OpenImages
 
 
 MODULES_SPECS = {

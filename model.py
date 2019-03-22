@@ -5,8 +5,8 @@ slim = tf.contrib.slim
 class Model(object):
 
     def __init__(self, batch_size):
-        from .fashion_net import fashion_net
-        from .fashion_open_images_helpers import FashionOpenImages
+        from fashion_net import fashion_net
+        from fashion_open_images_helpers import FashionOpenImages
 
         session_config = tf.ConfigProto(allow_soft_placement=True)
         session_config.gpu_options.allow_growth = True

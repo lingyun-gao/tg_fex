@@ -5,7 +5,7 @@ from __future__ import print_function
 import tensorflow as tf
 slim = tf.contrib.slim
 
-from .tg_layers import pad_conv2d, pad_max_pool2d, pad_avg_pool2d
+from tg_layers import pad_conv2d, pad_max_pool2d, pad_avg_pool2d
 
 
 def build_inception_module(name, net, nfilters):

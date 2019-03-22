@@ -1,6 +1,6 @@
 import os
 import time
-from io import StringIO
+from io import BytesIO
 # from StringIO import StringIO
 
 import io
@@ -33,7 +33,8 @@ def pad_image(img, pad):
     d = max(w, h)
     padding = pad if pad is not None else avg_image_border(img)
     new_im = Image.new('RGB', (d, d), padding)
-    new_im.paste(img, ((d - w) / 2, (d - h) / 2))
+    w_, h_ = int((d - w) / 2), int((d - h) / 2)
+    new_im.paste(img, (w_, h_))
 
     return new_im
 
@@ -57,7 +58,7 @@ def get_image_from_url(img_url):
         try:
             r = requests.get(img_url, verify=False)
 
-            img = Image.open(StringIO(r.content))
+            img = Image.open(BytesIO(r.content))
 
             if img.mode != 'RGB':
                 img = img.convert('RGB')
@@ -67,8 +68,12 @@ def get_image_from_url(img_url):
         except requests.exceptions.ConnectionError:
             time.sleep(1)
             n_tries += 1
+        
+            print ('here a')
 
-        except Exception:
+        except Exception as e:
+            print ('here b')
+            print(e)
             break
 
     print('Couldn\'t download image with url: %s' % img_url)

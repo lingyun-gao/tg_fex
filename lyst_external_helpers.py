@@ -1,4 +1,3 @@
-import json
 import requests
 
 
@@ -8,12 +7,12 @@ CANONICAL_LABELS_URL = 'https://s3.amazonaws.com/tg-training-data/lyst_external/
 
 def get_modules_specs():
     r = requests.get(MODULES_SPECS_URL)
-    return json.loads(r.content)
+    return r.json()
 
 
 def get_num2names():
     r = requests.get(CANONICAL_LABELS_URL)
-    lines = r.content.strip().split('\n')
+    lines = r.text.strip().split('\n')
 
     num2names = []
     for line in lines:
@@ -62,10 +61,9 @@ class LystExternal:
     num2idx = maps['num2idx']  # per module
     idx2num = maps['idx2num']  # per module
     idx2name = maps['idx2name']  # per module
-    num_classes = len(num2module)
-    modules_specs = [
-        (mod_name, len(mod_specs)) for mod_name, mod_specs in num2idx.items()
-    ]
-    modules_weights = [
-        (mod_name, mod_size / float(num_classes)) for mod_name, mod_size in modules_specs
-    ]
+    num_classes = len(maps['idx2name'])
+    modules_specs = []
+    modules_weights = []
+    for mod_name, mod_specs in num2idx.items():
+        modules_specs.append((mod_name, len(mod_specs)))
+        modules_weights.append((mod_name, len(mod_specs) / len(num2module)))
